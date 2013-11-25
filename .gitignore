@@ -722,3 +722,10 @@ contrib/build-mca-comps-outside-of-tree/libtool
 contrib/scaling/orte_no_op
 contrib/scaling/mpi_no_op
 contrib/scaling/mpi_barrier
+ompi/contrib/vt/*
+ompi/mca/io/*
+contrib/dist/*
+ompi/include/mpi_portable_platform.h
+oshmem/tools/oshmem_info/oshmem_info
+oshmem/tools/oshmem_info/oshmem_info.1
+
