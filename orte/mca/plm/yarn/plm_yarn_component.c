@@ -25,7 +25,7 @@
 #include "orte_config.h"
 #include "orte/constants.h"
 
-#include "opal/mca/base/mca_base_param.h"
+//#include "opal/mca/base/mca_base_param.h"
 
 #include "orte/util/name_fns.h"
 #include "orte/runtime/orte_globals.h"
@@ -95,7 +95,7 @@ static int orte_plm_yarn_component_query(mca_base_module_t **module, int *priori
 {
 	*priority = 0;
 
-	OPAL_OUTPUT_VERBOSE((1, orte_plm_globals.output,
+	OPAL_OUTPUT_VERBOSE((1, orte_plm_base_framework.framework_output,
 					"%s plm:yarn: available for selection",
 					ORTE_NAME_PRINT(ORTE_PROC_MY_NAME)));
 

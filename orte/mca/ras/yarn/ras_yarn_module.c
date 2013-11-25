@@ -54,8 +54,8 @@
 
 #include "ras_yarn.h"
 
-#include "common/hdclient.h"
-#include "common/base/allocate.h"
+#include "orte/mca/common/hdclient.h"
+#include "orte/mca/common/base/allocate.h"
 
 /*
  * API functions
@@ -102,14 +102,14 @@ static int orte_ras_yarn_allocate_internal(int np, opal_list_t* nodes) {
     	node->slots = node_resource_array[i].slot_num;
     	opal_list_append(nodes, &node->super);
 
-    	OPAL_OUTPUT_VERBOSE((5, orte_ras_base.ras_output,
+    	OPAL_OUTPUT_VERBOSE((5, orte_ras_base_framework.framework_output,
     	                     "%s ras:yarn: adding node %s with %d slot",
     	                     ORTE_NAME_PRINT(ORTE_PROC_MY_NAME),
     	                     node->name, node->slots));
     }
 
     // All done
-    OPAL_OUTPUT_VERBOSE((1, orte_ras_base.ras_output,
+    OPAL_OUTPUT_VERBOSE((1, orte_ras_base_framework.framework_output,
                          "%s ras:yarn:allocate: success",
                          ORTE_NAME_PRINT(ORTE_PROC_MY_NAME)));
 
