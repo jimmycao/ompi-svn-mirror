@@ -585,27 +585,20 @@ static int orte_odls_yarn_launch_local_procs(opal_buffer_t *data)
 
     /* create dir for pid file */
     if (ORTE_SUCCESS != (rc = create_dir_for_pidfile())) {
-        opal_output(0, "%s odls:yarn:orte_odls_yarn_launch_local_procs, failed to create directory for pidfile");
+        opal_output(0, "%s odls:yarn:orte_odls_yarn_launch_local_procs, failed to create directory for pidfile",
+        		ORTE_NAME_PRINT(ORTE_PROC_MY_NAME));
         ORTE_ERROR_LOG(rc);
     }
 
-//    /* register a callback for hnp sync response */
-//    if (ORTE_SUCCESS != (rc = orte_rml.recv_buffer_nb(ORTE_NAME_WILDCARD,
-//                                                      ORTE_RML_TAG_YARN_SYNC_RESPONSE,
-//                                                      ORTE_RML_PERSISTENT,
-//                                                      yarn_daemon_sync_recv, NULL))) {
-//        ORTE_ERROR_LOG(rc);
-//        return rc;
-//    }
+    /* register a callback for hnp sync response */
+    orte_rml.recv_buffer_nb(ORTE_NAME_WILDCARD, ORTE_RML_TAG_YARN_SYNC_RESPONSE,
+    		ORTE_RML_PERSISTENT, yarn_daemon_sync_recv, NULL);
 
     /* send a sync msg to hnp */
     msg = OBJ_NEW(opal_buffer_t);
-//    if (0 > (rc = orte_rml.send_buffer_nb(ORTE_PROC_MY_HNP, msg, ORTE_RML_TAG_YARN_SYNC_REQUEST, 0,
-//                                          orte_rml_send_callback, NULL))) {
-//        ORTE_ERROR_LOG(rc);
-//        OBJ_RELEASE(msg);
-//        return rc;
-//    }
+    orte_rml.send_buffer_nb(ORTE_PROC_MY_HNP, msg, ORTE_RML_TAG_YARN_SYNC_REQUEST,
+                                              orte_rml_send_callback, NULL);
+
     OPAL_OUTPUT_VERBOSE((5, orte_odls_globals.output,
                      "%s odls:yarn:orte_odls_yarn_launch_local_procs: finish send sync request to hnp, waitting for response ",
                      ORTE_NAME_PRINT(ORTE_PROC_MY_NAME)));

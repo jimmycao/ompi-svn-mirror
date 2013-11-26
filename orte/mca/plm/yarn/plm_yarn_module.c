@@ -964,13 +964,9 @@ static void plm_yarn_launch_apps(int fd, short args, void *cbdata)
     /* update job state */
     jdata->state = caddy->job_state;
 
-//    /* register recv callback for daemons sync request */
-//    if (ORTE_SUCCESS != (rc = orte_rml.recv_buffer_nb(ORTE_NAME_WILDCARD,
-//                                                      ORTE_RML_TAG_YARN_SYNC_REQUEST,
-//                                                      ORTE_RML_PERSISTENT,
-//                                                      yarn_hnp_sync_recv, jdata))) {
-//        ORTE_ERROR_LOG(rc);
-//    }
+    /* register recv callback for daemons sync request */
+    orte_rml.recv_buffer_nb(ORTE_NAME_WILDCARD, ORTE_RML_TAG_YARN_SYNC_REQUEST,
+    		ORTE_RML_PERSISTENT, yarn_hnp_sync_recv, jdata);
 
     orte_plm_base_launch_apps(fd, args, cbdata);
 
