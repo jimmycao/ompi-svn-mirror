@@ -18,11 +18,9 @@
 # $HEADER$
 #
 
-SUBDIRS = config contrib $(MCA_PROJECT_SUBDIRS) test
+SUBDIRS = config $(MCA_PROJECT_SUBDIRS)
 EXTRA_DIST = README INSTALL VERSION Doxyfile LICENSE autogen.pl autogen.sh \
              README.JAVA.txt
-
-include examples/Makefile.include
 
 dist-hook:
 	csh "$(top_srcdir)/config/distscript.csh" "$(top_srcdir)" "$(distdir)" "$(OMPI_VERSION)" "$(OMPI_SVN_R)"
