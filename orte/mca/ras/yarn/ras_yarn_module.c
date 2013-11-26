@@ -60,14 +60,16 @@
 /*
  * API functions
  */
-static int orte_ras_yarn_allocate(opal_list_t *nodes);
+static int orte_ras_yarn_allocate(orte_job_t *jdata, opal_list_t *nodes);
 static int orte_ras_yarn_finalize(void);
 
 /*
  * RAS yarn module
  */
 orte_ras_base_module_t orte_ras_yarn_module = {
+	NULL,
     orte_ras_yarn_allocate,
+    NULL,
     orte_ras_yarn_finalize
 };
 
@@ -121,7 +123,9 @@ cleanup:
 	return ORTE_ERROR;
 }
 
-static int orte_ras_yarn_allocate(opal_list_t* nodes) {
+//static int orte_ras_yarn_allocate(opal_list_t* nodes)
+static int orte_ras_yarn_allocate(orte_job_t *jdata, opal_list_t *nodes)
+{
     int i, j, rc;
 
     if (0 != (rc = orte_hdclient_connect_to_am())) {
@@ -140,18 +144,12 @@ static int orte_ras_yarn_allocate(opal_list_t* nodes) {
 
     // calculate all slots needed
     int slot_num = 0;
-    for (i = 1; i < orte_job_data->size; i++) {
-        orte_job_t* jdata = opal_pointer_array_get_item(orte_job_data, i);
-        if (!jdata) {
-            continue;
-        }
-        orte_app_context_t* app = NULL;
-        for (j = 0; j < jdata->apps->size; j++) {
-            if (NULL == (app = (orte_app_context_t*)opal_pointer_array_get_item(jdata->apps, j))) {
-                continue;
-            }
-            slot_num += app->num_procs;
-        }
+    for (i = 0; i < jdata->apps->size; i++) {
+    	orte_app_context_t *app = NULL;
+    	if (NULL == (app = (orte_app_context_t*)opal_pointer_array_get_item(jdata->apps, i))) {
+    		continue;
+    	}
+    	slot_num += app->num_procs;
     }
 
     return orte_ras_yarn_allocate_internal(slot_num, nodes);

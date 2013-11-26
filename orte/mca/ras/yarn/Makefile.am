@@ -10,5 +10,6 @@ mcacomponentdir = $(libdir)/openmpi
 mcacomponent_LTLIBRARIES = mca_ras_yarn.la
 mca_ras_yarn_la_SOURCES = $(sources) 
 #mca_ras_yarn_la_LIBADD = $(libdir)/libopen-rte.la $(top_builddir)/common/libhamster_common.la
+mca_ras_yarn_la_LIBADD = ../../common/libhamster_common.la
 mca_ras_yarn_la_LDFLAGS = -module -avoid-version 
 #mca_ras_yarn_la_DEPENDENCIES = $(top_builddir)/common/libhamster_common.la
