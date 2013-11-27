@@ -1150,28 +1150,28 @@ if ($include_arg) {
 
 #---------------------------------------------------------------------------
 
-++$step;
-verbose "\n$step. Running template-generating scripts\n\n";
+#++$step;
+#verbose "\n$step. Running template-generating scripts\n\n";
 
 # These scripts generate fortran header files of different types, but
 # guaranteed to have the same value (i.e., so humans don't have to
 # maintain two sets of files, and potentially have values get out of
 # sync).
 
-my @scripts;
-push(@scripts, "ompi/include/mpif-values.pl");
+#my @scripts;
+#push(@scripts, "ompi/include/mpif-values.pl");
 
-foreach my $s (@scripts) {
-    verbose "=== $s\n";
-    if (! -x $s) {
-        print "Cannot find executable $s!\nAborting.\n";
-        my_exit(1);
-    }
-    if (system($s) != 0) {
-        print "Script failed: $s\n";
-        my_exit(1);
-    }
-}
+#foreach my $s (@scripts) {
+#    verbose "=== $s\n";
+#    if (! -x $s) {
+#        print "Cannot find executable $s!\nAborting.\n";
+#        my_exit(1);
+#    }
+#    if (system($s) != 0) {
+#        print "Script failed: $s\n";
+#        my_exit(1);
+#    }
+#}
 
 #---------------------------------------------------------------------------
 
@@ -1182,10 +1182,10 @@ verbose "\n$step. Searching for projects, MCA frameworks, and MCA components\n";
 my $ret;
 
 # Figure out if we're at the top level of the OMPI tree or not.
-if (! (-f "VERSION" && -f "configure.ac" && -f $topdir_file)) {
-    print("\n\nYou must run this script from the top-level directory of the Open MPI tree.\n\n");
-    my_exit(1);
-}
+#if (! (-f "VERSION" && -f "configure.ac" && -f $topdir_file)) {
+#    print("\n\nYou must run this script from the top-level directory of the Open MPI tree.\n\n");
+#    my_exit(1);
+#}
 
 # Top-level projects to examine
 my $projects;

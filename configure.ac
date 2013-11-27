@@ -117,8 +117,8 @@ m4_ifdef([project_orte],
                             [orte/include/orte/version.h])])
 
 
-OPAL_SAVE_VERSION([OPAL], [Open Portable Access Layer], [$srcdir/VERSION],
-                  [opal/include/opal/version.h])
+#OPAL_SAVE_VERSION([OPAL], [Open Portable Access Layer], [$srcdir/VERSION],
+#                  [opal/include/opal/version.h])
 
 # Get shared library version numbers
 
@@ -162,7 +162,7 @@ AC_MSG_RESULT([$ltversion])
 
 # List header files to generate
 
-AC_CONFIG_HEADERS([opal/include/opal_config.h])
+#AC_CONFIG_HEADERS([opal/include/opal_config.h])
 m4_ifdef([project_orte],
          [AC_CONFIG_HEADERS([orte/include/orte_config.h])])
 m4_ifdef([project_ompi],
@@ -1326,7 +1326,7 @@ AC_CONFIG_FILES([
     config/Makefile
 	])
 
-OPAL_CONFIG_FILES
+#OPAL_CONFIG_FILES
 m4_ifdef([project_orte], [ORTE_CONFIG_FILES])
 m4_ifdef([project_ompi], [OMPI_CONFIG_FILES])
 

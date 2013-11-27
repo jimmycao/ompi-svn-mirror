@@ -33,7 +33,7 @@ libmca_rmaps_la_SOURCES += \
 
 dist_pkgdata_DATA = base/help-orte-rmaps-base.txt
 
-if OPAL_HAVE_HWLOC
-libmca_rmaps_la_SOURCES += \
-        base/rmaps_base_binding.c
-endif
+#if OPAL_HAVE_HWLOC
+#libmca_rmaps_la_SOURCES += \
+#        base/rmaps_base_binding.c
+#endif
