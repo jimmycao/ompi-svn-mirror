@@ -694,7 +694,8 @@ static int setup_daemon_proc_env_and_argv(orte_proc_t* proc, char ***pargv,
     *penv = opal_argv_copy(orte_launch_environ);
 
     /* prepend orted to argv */
-    opal_argv_append(argc, pargv, "orted");
+//    opal_argv_append(argc, pargv, "orted");
+    opal_argv_append(argc, pargv, "hrted");
 
     /* ess */
     opal_argv_append(argc, pargv, "-mca");

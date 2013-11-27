@@ -34,7 +34,7 @@ EXTRA_DIST = $(man_pages:.1=.1in)
 
 if OMPI_INSTALL_BINARIES
 
-bin_PROGRAMS = orterun
+bin_PROGRAMS = hrterun
 
 nodist_man_MANS = $(man_pages)
 
@@ -47,12 +47,12 @@ dist_pkgdata_DATA = help-orterun.txt
 
 endif # OMPI_INSTALL_BINARIES
 
-orterun_SOURCES = \
+hrterun_SOURCES = \
         main.c \
         orterun.c \
         orterun.h
 
-orterun_LDADD = $(top_builddir)/orte/libopen-rte.la $(top_builddir)/opal/libopen-pal.la
+hrterun_LDADD = $(top_builddir)/orte/libopen-rte.la $(top_builddir)/opal/libopen-pal.la
 
 distclean-local:
 	rm -f $(man_pages)

@@ -730,4 +730,5 @@ contrib/dist/*
 ompi/include/mpi_portable_platform.h
 oshmem/tools/oshmem_info/oshmem_info
 oshmem/tools/oshmem_info/oshmem_info.1
-
+orte/tools/orted/hrted
+orte/tools/orterun/hrterun
