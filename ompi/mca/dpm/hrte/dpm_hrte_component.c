@@ -21,9 +21,9 @@
 
 #include "dpm_hrte.h"
 
-static int dpm_orte_component_open(void);
-static int dpm_orte_component_close(void);
-static int dpm_orte_component_query(mca_base_module_t **module, int *priority);
+static int dpm_hrte_component_open(void);
+static int dpm_hrte_component_close(void);
+static int dpm_hrte_component_query(mca_base_module_t **module, int *priority);
 
 ompi_dpm_base_component_t mca_dpm_hrte_component = {
     /* First, the mca_base_component_t struct containing meta
@@ -36,9 +36,9 @@ ompi_dpm_base_component_t mca_dpm_hrte_component = {
       OMPI_MAJOR_VERSION,  /* MCA component major version */
       OMPI_MINOR_VERSION,  /* MCA component minor version */
       OMPI_RELEASE_VERSION,  /* MCA component release version */
-      dpm_orte_component_open,  /* component open */
-      dpm_orte_component_close, /* component close */
-      dpm_orte_component_query  /* component query */
+      dpm_hrte_component_open,  /* component open */
+      dpm_hrte_component_close, /* component close */
+      dpm_hrte_component_query  /* component query */
     },
     {
         /* This component is checkpoint ready */
@@ -47,19 +47,19 @@ ompi_dpm_base_component_t mca_dpm_hrte_component = {
 };
 
 
-static int dpm_orte_component_open(void)
+static int dpm_hrte_component_open(void)
 {
     return OMPI_SUCCESS;
 }
 
-static int dpm_orte_component_close(void)
+static int dpm_hrte_component_close(void)
 {
     return OMPI_SUCCESS;
 }
 
-static int dpm_orte_component_query(mca_base_module_t **module, int *priority)
+static int dpm_hrte_component_query(mca_base_module_t **module, int *priority)
 {
     *priority = 20;
-    *module = (mca_base_module_t *) &ompi_dpm_orte_module;
+    *module = (mca_base_module_t *) &ompi_dpm_hrte_module;
     return OMPI_SUCCESS;
 }

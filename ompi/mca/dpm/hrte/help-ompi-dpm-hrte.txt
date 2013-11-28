@@ -19,7 +19,7 @@
 #
 # This is the US/English general help file for Open MPI.
 #
-[dpm-orte:no-server]
+[dpm-hrte:no-server]
 Process rank %ld attempted to %s a global ompi_server that
 could not be contacted. This is typically caused by either not
 specifying the contact info for the server, or by the server not
@@ -27,14 +27,14 @@ currently executing. If you did specify the contact info for a
 server, please check to see that the server is running and start
 it again (or have your sys admin start it) if it isn't.
 
-[dpm-orte:unknown-order]
+[dpm-hrte:unknown-order]
 Process rank %ld attempted to lookup a value but provided an
 unrecognized order parameter. Order parameters are used to tell Open
 MPI if it should first look for the requested value locally (i.e., from
 the current job) or from a global ompi_server. Accepted order
 parameters are "local" and "global", respectively.
 
-[dpm-orte:too-many-orders]
+[dpm-hrte:too-many-orders]
 Process rank %ld attempted to lookup a value but provided too many
 order parameters (%ld found). Order parameters are used to tell
 Open MPI if it should first look for the requested value locally

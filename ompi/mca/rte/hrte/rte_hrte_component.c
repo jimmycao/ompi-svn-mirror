@@ -29,7 +29,7 @@ const char *ompi_rte_hrte_component_version_string =
 /*
  * Local function
  */
-static int rte_orte_open(void);
+static int rte_hrte_open(void);
 
 /*
  * Instantiate the public struct with all of our public information
@@ -51,7 +51,7 @@ const ompi_rte_component_t mca_rte_hrte_component = {
         OMPI_RELEASE_VERSION,
 
         /* Component open and close functions */
-        rte_orte_open,
+        rte_hrte_open,
         NULL
     },
     {
@@ -61,7 +61,7 @@ const ompi_rte_component_t mca_rte_hrte_component = {
 };
 
 
-static int rte_orte_open(void)
+static int rte_hrte_open(void)
 {    
     return OPAL_SUCCESS;
 }

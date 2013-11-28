@@ -66,18 +66,18 @@ static void setup_server(void)
     int rc;
     
     OPAL_OUTPUT_VERBOSE((1, ompi_pubsub_base_framework.framework_output,
-                         "%s pubsub:orte: setting up server at URI %s",
+                         "%s pubsub:hrte: setting up server at URI %s",
                          ORTE_NAME_PRINT(ORTE_PROC_MY_NAME),
-                         (NULL == mca_pubsub_orte_component.server_uri) ? "NULL" : mca_pubsub_orte_component.server_uri));
+                         (NULL == mca_pubsub_hrte_component.server_uri) ? "NULL" : mca_pubsub_hrte_component.server_uri));
     
     /* flag setup as completed so we only pass through here once */
     server_setup = true;
 
-    if (NULL == mca_pubsub_orte_component.server_uri) {
+    if (NULL == mca_pubsub_hrte_component.server_uri) {
         /* if the contact info for the server is NULL, then there
          * is nothing we can do - there is no path to the server
          */
-        mca_pubsub_orte_component.server_found = false;
+        mca_pubsub_hrte_component.server_found = false;
         return;
     }
     
@@ -86,31 +86,31 @@ static void setup_server(void)
      * info into a buffer
      */
     OBJ_CONSTRUCT(&buf, opal_buffer_t);
-    opal_dss.pack(&buf, &mca_pubsub_orte_component.server_uri, 1, OPAL_STRING);
+    opal_dss.pack(&buf, &mca_pubsub_hrte_component.server_uri, 1, OPAL_STRING);
     /* extract the server's name so we have its jobid */
-    if (ORTE_SUCCESS != (rc = orte_rml_base_parse_uris(mca_pubsub_orte_component.server_uri,
-                                                       &mca_pubsub_orte_component.server, NULL))) {
+    if (ORTE_SUCCESS != (rc = orte_rml_base_parse_uris(mca_pubsub_hrte_component.server_uri,
+                                                       &mca_pubsub_hrte_component.server, NULL))) {
         ORTE_ERROR_LOG(rc);
         OBJ_DESTRUCT(&buf);
-        mca_pubsub_orte_component.server_found = false;
+        mca_pubsub_hrte_component.server_found = false;
         return;
     }
     /* init routes to the server's job */
-    if (ORTE_SUCCESS != (rc = orte_routed.init_routes(mca_pubsub_orte_component.server.jobid, &buf))) {
+    if (ORTE_SUCCESS != (rc = orte_routed.init_routes(mca_pubsub_hrte_component.server.jobid, &buf))) {
         ORTE_ERROR_LOG(rc);
-        mca_pubsub_orte_component.server_found = false;
+        mca_pubsub_hrte_component.server_found = false;
         OBJ_DESTRUCT(&buf);
         return;
     }
     OBJ_DESTRUCT(&buf);
 
     /* flag the server as found */
-    mca_pubsub_orte_component.server_found = true;
+    mca_pubsub_hrte_component.server_found = true;
 
     OPAL_OUTPUT_VERBOSE((1, ompi_pubsub_base_framework.framework_output,
-                         "%s pubsub:orte: server %s setup",
+                         "%s pubsub:hrte: server %s setup",
                          ORTE_NAME_PRINT(ORTE_PROC_MY_NAME),
-                         ORTE_NAME_PRINT(&mca_pubsub_orte_component.server)));
+                         ORTE_NAME_PRINT(&mca_pubsub_hrte_component.server)));
 }
 
 /*
@@ -144,9 +144,9 @@ static int publish ( const char *service_name, ompi_info_t *info, const char *po
         if (!server_setup) {
             setup_server();
         }
-        if (mca_pubsub_orte_component.server_found) {
+        if (mca_pubsub_hrte_component.server_found) {
             /* server was found - use it as our default store */
-            info_host = &mca_pubsub_orte_component.server;
+            info_host = &mca_pubsub_hrte_component.server;
             global_scope = true;
         } else {
             /* server was not found - use our HNP as default store */
@@ -163,16 +163,16 @@ static int publish ( const char *service_name, ompi_info_t *info, const char *po
         /* store the value on the global ompi_server, but error
          * if that server wasn't contacted
          */
-        if (!mca_pubsub_orte_component.server_found) {
-            opal_show_help("help-ompi-pubsub-orte.txt", "pubsub-orte:no-server",
+        if (!mca_pubsub_hrte_component.server_found) {
+            opal_show_help("help-ompi-pubsub-hrte.txt", "pubsub-hrte:no-server",
                            true, (long)ORTE_PROC_MY_NAME->vpid, "publish to");
             return OMPI_ERR_NOT_FOUND;
         }
-        info_host = &mca_pubsub_orte_component.server;
+        info_host = &mca_pubsub_hrte_component.server;
     }
     
     OPAL_OUTPUT_VERBOSE((1, ompi_pubsub_base_framework.framework_output,
-                         "%s pubsub:orte: publishing service %s scope %s",
+                         "%s pubsub:hrte: publishing service %s scope %s",
                          ORTE_NAME_PRINT(ORTE_PROC_MY_NAME),
                          service_name, global_scope ? "Global" : "Local"));
 
@@ -286,8 +286,8 @@ static char* lookup ( const char *service_name, ompi_info_t *info )
             if (NULL != tokens) {
                 if ((num_tokens = opal_argv_count(tokens)) > 2) {
                     /* too many values in the comma-delimited list */
-                    opal_show_help("help-ompi-pubsub-orte.txt",
-                                   "pubsub-orte:too-many-orders",
+                    opal_show_help("help-ompi-pubsub-hrte.txt",
+                                   "pubsub-hrte:too-many-orders",
                                    true, (long)ORTE_PROC_MY_NAME->vpid,
                                    (long)num_tokens);
                     return NULL;
@@ -300,8 +300,8 @@ static char* lookup ( const char *service_name, ompi_info_t *info )
                             lookup[i] = GLOBAL;
                         } else {
                             /* unrecognized value -- that's an error */
-                            opal_show_help("help-ompi-pubsub-orte.txt",
-                                           "pubsub-orte:unknown-order",
+                            opal_show_help("help-ompi-pubsub-hrte.txt",
+                                           "pubsub-hrte:unknown-order",
                                            true, (long)ORTE_PROC_MY_NAME->vpid);
                             return NULL;
                         }
@@ -317,8 +317,8 @@ static char* lookup ( const char *service_name, ompi_info_t *info )
             /* if the user provided an info key, then we at least must
              * be given one place to look
              */
-            opal_show_help("help-ompi-pubsub-orte.txt",
-                           "pubsub-orte:unknown-order",
+            opal_show_help("help-ompi-pubsub-hrte.txt",
+                           "pubsub-hrte:unknown-order",
                            true, (long)ORTE_PROC_MY_NAME->vpid);
             return NULL;
         }
@@ -331,7 +331,7 @@ static char* lookup ( const char *service_name, ompi_info_t *info )
             setup_server();
         }
         lookup[1] = NONE;
-        if (mca_pubsub_orte_component.server_found) {
+        if (mca_pubsub_hrte_component.server_found) {
             lookup[0] = GLOBAL;
         } else {
             /* global server was not found - just look local */
@@ -340,7 +340,7 @@ static char* lookup ( const char *service_name, ompi_info_t *info )
     }
     
     OPAL_OUTPUT_VERBOSE((1, ompi_pubsub_base_framework.framework_output,
-                         "%s pubsub:orte: lookup service %s scope %d",
+                         "%s pubsub:hrte: lookup service %s scope %d",
                          ORTE_NAME_PRINT(ORTE_PROC_MY_NAME),
                          service_name, lookup[0]));
     
@@ -357,20 +357,20 @@ static char* lookup ( const char *service_name, ompi_info_t *info )
             /* lookup the value on the global ompi_server, but error
              * if that server wasn't contacted
              */
-            if (!mca_pubsub_orte_component.server_found) {
-                opal_show_help("help-ompi-pubsub-orte.txt",
-                               "pubsub-orte:no-server",
+            if (!mca_pubsub_hrte_component.server_found) {
+                opal_show_help("help-ompi-pubsub-hrte.txt",
+                               "pubsub-hrte:no-server",
                                true, (long)ORTE_PROC_MY_NAME->vpid,
                                "lookup from");
                 return NULL;
             }
-            info_host = &mca_pubsub_orte_component.server;
+            info_host = &mca_pubsub_hrte_component.server;
         } else if (NONE == lookup[i]) {
             continue;
         } else {
             /* unknown host! */
-            opal_show_help("help-ompi-pubsub-orte.txt",
-                           "pubsub-orte:unknown-order",
+            opal_show_help("help-ompi-pubsub-hrte.txt",
+                           "pubsub-hrte:unknown-order",
                            true, (long)ORTE_PROC_MY_NAME->vpid);
             return NULL;
         }
@@ -419,7 +419,7 @@ static char* lookup ( const char *service_name, ompi_info_t *info )
         }
 
         OPAL_OUTPUT_VERBOSE((1, ompi_pubsub_base_framework.framework_output,
-                             "%s pubsub:orte: lookup returned status %d",
+                             "%s pubsub:hrte: lookup returned status %d",
                              ORTE_NAME_PRINT(ORTE_PROC_MY_NAME), rc));
 
         if (ORTE_SUCCESS == rc) {
@@ -432,7 +432,7 @@ static char* lookup ( const char *service_name, ompi_info_t *info )
             }
             
             OPAL_OUTPUT_VERBOSE((1, ompi_pubsub_base_framework.framework_output,
-                                 "%s pubsub:orte: lookup returned port %s",
+                                 "%s pubsub:hrte: lookup returned port %s",
                                  ORTE_NAME_PRINT(ORTE_PROC_MY_NAME),
                                  (NULL == port_name) ? "NULL" : port_name));
 
@@ -476,9 +476,9 @@ static int unpublish ( const char *service_name, ompi_info_t *info )
         if (!server_setup) {
             setup_server();
         }
-        if (mca_pubsub_orte_component.server_found) {
+        if (mca_pubsub_hrte_component.server_found) {
             /* server was found - use it as our default store */
-            info_host = &mca_pubsub_orte_component.server;
+            info_host = &mca_pubsub_hrte_component.server;
             global_scope = true;
         } else {
             /* server was not found - use our HNP as default store */
@@ -495,16 +495,16 @@ static int unpublish ( const char *service_name, ompi_info_t *info )
         /* unpublish the value from the global ompi_server, but error
         * if that server wasn't contacted
         */
-        if (!mca_pubsub_orte_component.server_found) {
-            opal_show_help("help-ompi-pubsub-orte.txt", "pubsub-orte:no-server",
+        if (!mca_pubsub_hrte_component.server_found) {
+            opal_show_help("help-ompi-pubsub-hrte.txt", "pubsub-hrte:no-server",
                            true, (long)ORTE_PROC_MY_NAME->vpid, "unpublish from");
             return OMPI_ERR_NOT_FOUND;
         }
-        info_host = &mca_pubsub_orte_component.server;
+        info_host = &mca_pubsub_hrte_component.server;
     }
     
     OPAL_OUTPUT_VERBOSE((1, ompi_pubsub_base_framework.framework_output,
-                         "%s pubsub:orte: unpublish service %s scope %s",
+                         "%s pubsub:hrte: unpublish service %s scope %s",
                          ORTE_NAME_PRINT(ORTE_PROC_MY_NAME),
                          service_name, global_scope ? "Global" : "Local"));
     

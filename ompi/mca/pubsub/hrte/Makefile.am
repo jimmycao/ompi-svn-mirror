@@ -11,7 +11,7 @@
 # $HEADER$
 #
 
-dist_pkgdata_DATA = help-ompi-pubsub-orte.txt
+dist_pkgdata_DATA = help-ompi-pubsub-hrte.txt
 
 # Make the output library in this directory, and name it either
 # mca_<type>_<name>.la (for DSO builds) or libmca_<type>_<name>.la
