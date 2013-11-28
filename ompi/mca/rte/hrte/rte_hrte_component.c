@@ -23,8 +23,8 @@
 /*
  * Public string showing the component version number
  */
-const char *ompi_rte_orte_component_version_string =
-    "OMPI orte rte MCA component version " OMPI_VERSION;
+const char *ompi_rte_hrte_component_version_string =
+    "OMPI hrte rte MCA component version " OMPI_VERSION;
 
 /*
  * Local function
@@ -36,7 +36,7 @@ static int rte_orte_open(void);
  * and pointers to our public functions in it
  */
 
-const ompi_rte_component_t mca_rte_orte_component = {
+const ompi_rte_component_t mca_rte_hrte_component = {
 
     /* First, the mca_component_t struct containing meta information
        about the component itself */
@@ -65,4 +65,3 @@ static int rte_orte_open(void)
 {    
     return OPAL_SUCCESS;
 }
-

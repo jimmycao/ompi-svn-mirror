@@ -102,7 +102,7 @@ static void dpm_pclose(char *port);
 /*
  * instantiate the module
  */
-ompi_dpm_base_module_t ompi_dpm_orte_module = {
+ompi_dpm_base_module_t ompi_dpm_hrte_module = {
     init,
     connect_accept,
     disconnect,

@@ -25,7 +25,7 @@ static int dpm_orte_component_open(void);
 static int dpm_orte_component_close(void);
 static int dpm_orte_component_query(mca_base_module_t **module, int *priority);
 
-ompi_dpm_base_component_t mca_dpm_orte_component = {
+ompi_dpm_base_component_t mca_dpm_hrte_component = {
     /* First, the mca_base_component_t struct containing meta
        information about the component itself */
 
@@ -47,19 +47,19 @@ ompi_dpm_base_component_t mca_dpm_orte_component = {
 };
 
 
-int dpm_orte_component_open(void)
+static int dpm_orte_component_open(void)
 {
     return OMPI_SUCCESS;
 }
 
-int dpm_orte_component_close(void)
+static int dpm_orte_component_close(void)
 {
     return OMPI_SUCCESS;
 }
 
 static int dpm_orte_component_query(mca_base_module_t **module, int *priority)
 {
-    *priority = 50;
+    *priority = 20;
     *module = (mca_base_module_t *) &ompi_dpm_orte_module;
     return OMPI_SUCCESS;
 }

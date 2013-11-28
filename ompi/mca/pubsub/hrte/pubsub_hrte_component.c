@@ -26,9 +26,9 @@ static int pubsub_orte_component_open(void);
 static int pubsub_orte_component_close(void);
 static int pubsub_orte_component_query(mca_base_module_t **module, int *priority);
 
-static int my_priority = 50;
+static int my_priority = 20;
 
-ompi_pubsub_orte_component_t mca_pubsub_orte_component = {
+ompi_pubsub_orte_component_t mca_pubsub_hrte_component = {
     {
         /* First, the mca_base_component_t struct containing meta
            information about the component itself */
@@ -54,7 +54,7 @@ ompi_pubsub_orte_component_t mca_pubsub_orte_component = {
 
 static int pubsub_orte_component_register(void)
 {
-    my_priority = 50;
+    my_priority = 20;
     (void) mca_base_component_var_register(&mca_pubsub_orte_component.super.base_version,
                                            "priority", "Priority of the pubsub pmi component",
                                            MCA_BASE_VAR_TYPE_INT, NULL, 0, 0,

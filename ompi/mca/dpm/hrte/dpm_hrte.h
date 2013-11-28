@@ -27,9 +27,9 @@
 BEGIN_C_DECLS
 
 /* access to module */
-extern ompi_dpm_base_module_t ompi_dpm_orte_module;
+extern ompi_dpm_base_module_t ompi_dpm_hrte_module;
 
-OMPI_MODULE_DECLSPEC extern ompi_dpm_base_component_t mca_dpm_orte_component;
+OMPI_MODULE_DECLSPEC extern ompi_dpm_base_component_t mca_dpm_hrte_component;
 
 END_C_DECLS
 

@@ -567,7 +567,7 @@ static int finalize(void)
 /*
  * instantiate the module
  */
-ompi_pubsub_base_module_t ompi_pubsub_orte_module = {
+ompi_pubsub_base_module_t ompi_pubsub_hrte_module = {
     init,
     publish,
     unpublish,

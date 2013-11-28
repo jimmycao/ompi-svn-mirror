@@ -39,12 +39,12 @@ typedef struct {
 } ompi_pubsub_orte_component_t;
 
 /* access to module */
-extern ompi_pubsub_base_module_t ompi_pubsub_orte_module;
+extern ompi_pubsub_base_module_t ompi_pubsub_hrte_module;
 
 /* access to component so we can get to the locally
  * global values
  */
-OMPI_MODULE_DECLSPEC extern ompi_pubsub_orte_component_t mca_pubsub_orte_component;
+OMPI_MODULE_DECLSPEC extern ompi_pubsub_orte_component_t mca_pubsub_hrte_component;
 
 END_C_DECLS
 

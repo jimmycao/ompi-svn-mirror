@@ -11,7 +11,7 @@
 #
 
 # Highest priority, as it's the default
-AC_DEFUN([MCA_ompi_rte_hrte_PRIORITY], [100])
+AC_DEFUN([MCA_ompi_rte_hrte_PRIORITY], [50])
 
 # Force this component to compile in static-only mode
 AC_DEFUN([MCA_ompi_rte_hrte_COMPILE_MODE], [
@@ -35,10 +35,10 @@ AC_DEFUN([MCA_ompi_rte_hrte_CONFIG],[
     AC_CONFIG_FILES([ompi/mca/rte/hrte/Makefile])
 
     # This will need to get more complicated when we can build against
-    # an external HRTE.
+    # an external RTE.
     AC_ARG_WITH([hrte],
         AC_HELP_STRING([--with-hrte],
-                       [Use HRTE run-time environment (default: yes)]))
+                       [Use HRTE run-time environment (default: no)]))
     AS_IF([test "$with_hrte" != "no"],
           [$1],
           [AC_MSG_NOTICE([HRTE disabled by user])

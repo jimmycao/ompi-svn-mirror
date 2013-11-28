@@ -18,7 +18,7 @@ AC_DEFUN([MCA_ompi_dpm_hrte_CONFIG],[
     AC_MSG_CHECKING([hrte configuration args])
     AC_ARG_WITH([hrte],
         AC_HELP_STRING([--with-hrte],
-                       [Use HRTE run-time environment (default: yes)]))
+                       [Use HRTE run-time environment (default: no)]))
     AS_IF([test "$with_hrte" != "no"],
           [$1],
           [$2])
