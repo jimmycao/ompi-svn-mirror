@@ -7,6 +7,10 @@
 # $HEADER$
 #
 
+AUTOMAKE_OPTIONS = foreign
+AM_CPPFLAGS = -I$(includedir)/openmpi -I$(includedir)/openmpi/opal/mca/event/libevent2021/libevent -I$(includedir)/openmpi/opal/mca/hwloc/hwloc152/hwloc/include
+
+
 # main library setup
 noinst_LTLIBRARIES = libmca_dfs.la
 libmca_dfs_la_SOURCES =

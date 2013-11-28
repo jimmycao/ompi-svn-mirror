@@ -16,8 +16,12 @@
 #include "opal/class/opal_list.h"
 #include "opal/dss/dss_types.h"
 
+
 BEGIN_C_DECLS
 
+//-------------------
+#define ORTE_DECLSPEC
+//-------------------
 typedef uint8_t orte_dfs_cmd_t;
 #define ORTE_DFS_CMD_T OPAL_UINT8
 

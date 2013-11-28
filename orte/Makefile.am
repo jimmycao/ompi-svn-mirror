@@ -24,7 +24,7 @@ SUBDIRS = \
 	etc \
         . \
 	$(MCA_orte_FRAMEWORK_COMPONENT_DSO_SUBDIRS)
-
+	
 DIST_SUBDIRS = \
 	include \
 	etc \
@@ -37,7 +37,8 @@ lib_LTLIBRARIES = libopen-rte.la
 libopen_rte_la_SOURCES =
 libopen_rte_la_LIBADD = \
 	$(MCA_orte_FRAMEWORK_LIBS) \
-	$(top_ompi_builddir)/opal/libopen-pal.la
+	$(libdir)/libopen-pal.la
+#	$(top_ompi_builddir)/opal/libopen-pal.la
 libopen_rte_la_DEPENDENCIES = $(libopen_rte_la_LIBADD)
 libopen_rte_la_LDFLAGS = -version-info $(libopen_rte_so_version)
 

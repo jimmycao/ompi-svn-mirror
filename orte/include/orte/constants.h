@@ -18,9 +18,10 @@
 
 #ifndef ORTE_CONSTANTS_H
 #define ORTE_CONSTANTS_H
-
+#include "opal_config.h"
 #include "opal/constants.h"
 #include "orte_config.h"
+
 
 BEGIN_C_DECLS
 

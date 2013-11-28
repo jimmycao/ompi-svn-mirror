@@ -200,39 +200,39 @@ fi
 
 # Setup the top of the opal/include/opal_config.h file
 
-AH_TOP([/* -*- c -*-
- *
- * Copyright (c) 2004-2005 The Trustees of Indiana University.
- *                         All rights reserved.
- * Copyright (c) 2004-2005 The Trustees of the University of Tennessee.
- *                         All rights reserved.
- * Copyright (c) 2004-2005 High Performance Computing Center Stuttgart,
- *                         University of Stuttgart.  All rights reserved.
- * Copyright (c) 2004-2005 The Regents of the University of California.
- *                         All rights reserved.
- * $COPYRIGHT$
- *
- * Additional copyrights may follow
- *
- * $HEADER$
- *
- * Function: - OS, CPU and compiler dependent configuration
- */
+#AH_TOP([/* -*- c -*-
+# *
+# * Copyright (c) 2004-2005 The Trustees of Indiana University.
+# *                         All rights reserved.
+# * Copyright (c) 2004-2005 The Trustees of the University of Tennessee.
+# *                         All rights reserved.
+# * Copyright (c) 2004-2005 High Performance Computing Center Stuttgart,
+# *                         University of Stuttgart.  All rights reserved.
+# * Copyright (c) 2004-2005 The Regents of the University of California.
+# *                         All rights reserved.
+# * $COPYRIGHT$
+# *
+# * Additional copyrights may follow
+# *
+# * $HEADER$
+# *
+# * Function: - OS, CPU and compiler dependent configuration
+# */
 
-#ifndef OPAL_CONFIG_H
-#define OPAL_CONFIG_H
+# #ifndef OPAL_CONFIG_H
+# #define OPAL_CONFIG_H
 
-#include "opal_config_top.h"
+# #include "opal_config_top.h"
 
-])
-AH_BOTTOM([
-#include "opal_config_bottom.h"
-#endif /* OPAL_CONFIG_H */
-])
+#])
+# AH_BOTTOM([
+# #include "opal_config_bottom.h"
+# #endif /* OPAL_CONFIG_H */
+#])
 
 # Other basic setup stuff (shared with components)
 
-OPAL_BASIC_SETUP
+# OPAL_BASIC_SETUP
 
 top_ompi_srcdir="$OMPI_TOP_SRCDIR"
 AC_SUBST(top_ompi_srcdir)
@@ -731,6 +731,7 @@ ompi_show_title "Library and Function tests"
 OMPI_CHECK_FUNC_LIB([openpty], [util])
 # Checks for libraries.
 AC_CHECK_LIB([avro], [main], [], echo "NOT FOUND AVRO" && exit -1)
+#AC_CHECK_LIB([open-pal], [main], [], echo "NOT FOUND lib open-pal" && exit -1)
 AC_CHECK_LIB([nsl], [gethostbyname])
 
 AC_CHECK_LIB([socket], [socket])

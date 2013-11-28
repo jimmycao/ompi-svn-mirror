@@ -18,12 +18,17 @@
 #include "orte_config.h"
 #include "orte/types.h"
 #include "orte/constants.h"
+#include "opal_config.h"
+
+#define MCA_event_IMPLEMENTATION_HEADER "opal/mca/event/libevent2021/libevent2021.h"
 
 #include "opal/class/opal_list.h"
 #include "opal/mca/event/event.h"
 
+
 #include "opal/mca/mca.h"
 #include "orte/mca/dfs/dfs.h"
+
 
 
 BEGIN_C_DECLS
