@@ -740,7 +740,7 @@ ompi_show_title "Library and Function tests"
 # Darwin doesn't need -lutil, as it's something other than this -lutil.
 OMPI_CHECK_FUNC_LIB([openpty], [util])
 # Checks for libraries.
-AC_CHECK_LIB([avro], [main], [], echo "NOT FOUND AVRO" && exit -1)
+AC_CHECK_LIB([avro], [avro_value_write], [], [echo "Cannot find avro" && exit -1])
 AC_CHECK_LIB([nsl], [gethostbyname])
 
 AC_CHECK_LIB([socket], [socket])
